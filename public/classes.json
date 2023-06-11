@@ -1,0 +1,51 @@
+ [
+    {
+      "image": "https://i.ibb.co/X4KXs6S/c8.jpg",
+      "sportName": "Basketball",
+      "instructorName": "Sarah Smith",
+      "availableSeats": 12,
+      "price": "$60",
+      "enrolledCount": 8
+    },
+    {
+      "image": "https://images.pexels.com/photos/279991/pexels-photo-279991.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "sportName": "Tennis",
+      "instructorName": "David Johnson",
+      "availableSeats": 6,
+      "price": "$40",
+      "enrolledCount": 4
+    },
+    {
+      "image": "https://i.ibb.co/7QYpqJc/IMG-20220708-215617.jpg",
+      "sportName": "Soccer",
+      "instructorName": "Michael Brown",
+      "availableSeats": 15,
+      "price": "$70",
+      "enrolledCount": 10
+    },
+    {
+      "image": "https://i.ibb.co/X4KXs6S/c8.jpg",
+      "sportName": "Swimming",
+      "instructorName": "Emily Wilson",
+      "availableSeats": 8,
+      "price": "$50",
+      "enrolledCount": 6
+    },
+    {
+      "image": "https://i.ibb.co/X4KXs6S/c8.jpg",
+      "sportName": "Yoga",
+      "instructorName": "Jessica Taylor",
+      "availableSeats": 20,
+      "price": "$30",
+      "enrolledCount": 15
+    },
+    {
+      "image": "https://i.ibb.co/X4KXs6S/c8.jpg",
+      "sportName": "Boxing",
+      "instructorName": "Robert Martinez",
+      "availableSeats": 10,
+      "price": "$80",
+      "enrolledCount": 7
+    }
+  ]
+

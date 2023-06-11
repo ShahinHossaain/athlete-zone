@@ -1,0 +1,79 @@
+[
+    {
+      "imageUrl": "https://i.ibb.co/kSyZzQ4/pexels-photo-6326377.webp",
+      "instructorName": "John Doe",
+      "email": "johndoe@example.com",
+      "numClasses": 5,
+      "classes": [
+        "Class A",
+        "Class B",
+        "Class C",
+        "Class D",
+        "Class E"
+      ]
+    },
+    {
+      "imageUrl": "https://i.ibb.co/RBR7nVr/pexels-photo-7092613.webp",
+      "instructorName": "Jane Smith",
+      "email": "janesmith@example.com",
+      "numClasses": 3,
+      "classes": [
+        "Class X",
+        "Class Y",
+        "Class Z"
+      ]
+    },
+    {
+      "imageUrl": "https://i.ibb.co/kSyZzQ4/pexels-photo-6326377.webp",
+      "instructorName": "Mike Johnson",
+      "email": "mikejohnson@example.com",
+      "numClasses": 8,
+      "classes": [
+        "Class M",
+        "Class N",
+        "Class O",
+        "Class P",
+        "Class Q",
+        "Class R",
+        "Class S",
+        "Class T"
+      ]
+    },
+    {
+      "imageUrl": "https://i.ibb.co/kSyZzQ4/pexels-photo-6326377.webp",
+      "instructorName": "Sarah Davis",
+      "email": "sarahdavis@example.com",
+      "numClasses": 2,
+      "classes": [
+        "Class G",
+        "Class H"
+      ]
+    },
+    {
+      "imageUrl": "https://i.ibb.co/kSyZzQ4/pexels-photo-6326377.webp",
+      "instructorName": "David Wilson",
+      "email": "davidwilson@example.com",
+      "numClasses": 4,
+      "classes": [
+        "Class J",
+        "Class K",
+        "Class L",
+        "Class M"
+      ]
+    },
+    {
+      "imageUrl": "https://i.ibb.co/kSyZzQ4/pexels-photo-6326377.webp",
+      "instructorName": "Emily Thompson",
+      "email": "emilythompson@example.com",
+      "numClasses": 6,
+      "classes": [
+        "Class U",
+        "Class V",
+        "Class W",
+        "Class X",
+        "Class Y",
+        "Class Z"
+      ]
+    }
+  ]
+  

@@ -1,0 +1,29 @@
+@keyframes leftToRight {
+  100% {
+    transform: translateY(0%);
+  }
+  0% {
+    transform: translateY(-100%);
+  }
+}
+
+.animate-leftToRight {
+  animation-name: leftToRight;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes rightToLeft {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-150%);
+  }
+}
+
+.animate-rightToLeft {
+  animation-name: rightToLeft;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
