@@ -2,18 +2,20 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import FeedbackModal from "../../DashBoard/Admin/FeedbackModal/FeedbackModal";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const SinglePopularClass = ({
   classItem,
   isFromDashBoard,
   isFromManageClasses,
-  setUpdate,
+  refetch,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isApproveDenyDisabled, setIsApproveDenyDisabled] = useState(false);
 
-  const { user, setIsOpen, setModalId } = useContext(AuthContext);
+  const { user, setIsOpen, setModalId, isOpen } = useContext(AuthContext);
 
   console.log("classItem", classItem);
   const {
@@ -58,7 +60,7 @@ const SinglePopularClass = ({
       if (response) {
         alert("Successfully updated, please give a feedback");
         handleModal(_id);
-        setUpdate((p) => !p);
+        refetch();
       }
     } catch (error) {
       console.error(error);
@@ -77,8 +79,22 @@ const SinglePopularClass = ({
     updateClass("deny");
   };
 
+  const [role, setRole] = useState();
+  const [axiosSecure] = useAxiosSecure();
+  if (user) {
+    useEffect(() => {
+      axiosSecure
+        .get(`users/${user.email}`)
+        .then((res) => setRole(res.data.role));
+    }, [user]);
+  }
   return (
     <div className="relative max-w-sm bg-gray-300 rounded overflow-hidden shadow-lg">
+      <FeedbackModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        feedback={feedback}
+      ></FeedbackModal>
       <img className="w-full h-2/5" src={classImage} alt={className} />
       <div className="relative px-6 py-4">
         <div className="font-bold text-xl mb-2">{className}</div>
@@ -93,51 +109,53 @@ const SinglePopularClass = ({
         <p className="text-gray-700 text-base">Enrolled: {enrolledCount}</p>
         {isFromManageClasses && <p>status: {status}</p>}
       </div>
-      <div className=" px-6 pb-4">
-        {isFromManageClasses ? (
-          <div className="">
-            <div className="flex gap-2">
+      {!role === "instructor" && (
+        <div className=" px-6 pb-4">
+          {isFromManageClasses ? (
+            <div className="">
+              <div className="flex gap-2">
+                <button
+                  disabled={isApproveDenyDisabled}
+                  onClick={() => {
+                    handleApprove(_id);
+                  }}
+                  className="btn btn-primary w-1/2"
+                >
+                  Approve
+                </button>
+                <button
+                  disabled={isApproveDenyDisabled}
+                  onClick={() => {
+                    handleDeny(_id);
+                  }}
+                  className="btn btn-primary w-1/2"
+                >
+                  Deny
+                </button>
+              </div>
+
               <button
-                disabled={isApproveDenyDisabled}
-                onClick={() => {
-                  handleApprove(_id);
-                }}
-                className="btn btn-primary w-1/2"
+                onClick={() => handleModal(_id)}
+                className="btn btn-primary mt-2 w-full btn-sm"
               >
-                Approve
-              </button>
-              <button
-                disabled={isApproveDenyDisabled}
-                onClick={() => {
-                  handleDeny(_id);
-                }}
-                className="btn btn-primary w-1/2"
-              >
-                Deny
+                {feedback ? "modify feedback" : "feedback"}
               </button>
             </div>
-
+          ) : isFromDashBoard ? (
+            <div>
+              <button className="btn btn-primary">Enroll</button>
+              <button className="btn btn-primary ml-5">Delete</button>
+            </div>
+          ) : (
             <button
-              onClick={() => handleModal(_id)}
-              className="btn btn-primary mt-2 w-full btn-sm"
+              onClick={handleSelect}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >
-              {feedback ? "modify feedback" : "feedback"}
+              Select
             </button>
-          </div>
-        ) : isFromDashBoard ? (
-          <div>
-            <button className="btn btn-primary">Enroll</button>
-            <button className="btn btn-primary ml-5">Delete</button>
-          </div>
-        ) : (
-          <button
-            onClick={handleSelect}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Select
-          </button>
-        )}
-      </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

@@ -1,17 +1,23 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../../Provider/AuthProvider";
-import axios from "axios";
+// import axios from "axios";
 import SingleMyClass from "../SingleMyClass/SingleMyClass";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const Myclasses = () => {
   const { user } = useContext(AuthContext);
+  const [axiosSecure] = useAxiosSecure();
   const [classes, setClasses] = useState([]);
   const [update, setUpdate] = useState(true);
   useEffect(() => {
-    axios
+    axiosSecure
       .get(`classes?email=${user.email}`)
-      .then((res) => setClasses(res.data))
-      .then((err) => console.log(err));
+      .then((response) => {
+        setClasses(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, [update]);
   return (
     <div className="min-h-screen">

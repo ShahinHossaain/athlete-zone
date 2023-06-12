@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../../Provider/AuthProvider";
-import FeedBackModal from "../FeedBackModal/FeedBackModal";
 import UpdateClass from "../UpdateClass/UpdateClass";
 
 const SingleMyClass = ({ classDetails, setUpdate }) => {
@@ -16,26 +15,10 @@ const SingleMyClass = ({ classDetails, setUpdate }) => {
     availableSeats,
     price,
     status,
-    feedback,
   } = classDetails;
   console.log(instructorEmail, user);
   return (
     <div className="relative bg-gray-300">
-      {isOpen && (
-        <FeedBackModal
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          feedback={feedback}
-        ></FeedBackModal>
-      )}
-      {isModalOpen && (
-        <UpdateClass
-          classDetails={classDetails}
-          setIsModalOpen={setIsModalOpen}
-          setUpdate={setUpdate}
-        ></UpdateClass>
-      )}
-
       <div className="h-[500px]  rounded overflow-hidden shadow-lg">
         <img
           className="w-full p-5 mx-auto h-1/2"

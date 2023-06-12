@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import SinglePopularClass from "../../Home/SinglePopularClass/SinglePopularClass";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const Classes = () => {
   const [classes, setClasses] = useState();
+  const [axiosSecure] = useAxiosSecure();
   useEffect(() => {
-    fetch("classes.json")
-      .then((res) => res.json())
-      .then((data) => setClasses(data));
+    axiosSecure.get("/classes").then((res) => setClasses(res.data));
   }, []);
   return (
     <div>

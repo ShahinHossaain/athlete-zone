@@ -33,6 +33,22 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       // console.log("state changed to " + currentUser);
       // console.log(currentUser);
+      // TODO: use axios
+      if (currentUser?.email) {
+        axios
+          .post("/jwt", {
+            // Request body data
+            email: currentUser.email,
+          })
+          .then((response) => {
+            console.log("resdata", response.data); // Handle the response data
+            // Additional code to handle the response as needed
+            localStorage.setItem("access_token", response.data);
+          })
+          .catch((error) => {
+            console.error(error); // Handle the error
+          });
+      } else localStorage.removeItem("access_token");
       setUser(currentUser);
       if (!currentUser) localStorage.removeItem("toy-token");
       setLoading(false);

@@ -2,19 +2,36 @@ import { useContext, useEffect, useState } from "react";
 import SinglePopularClass from "../../../Home/SinglePopularClass/SinglePopularClass";
 import FeedbackModal from "../FeedbackModal/FeedbackModal";
 import { AuthContext } from "../../../../Provider/AuthProvider";
-import axios from "axios";
+// import axios from "axios";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const ManageClasses = () => {
-  const [classes, setClasses] = useState();
-  const { isOpen, setIsOpen } = useContext(AuthContext);
-  const [update, setUpdate] = useState(true);
+  const [axiosSecure] = useAxiosSecure();
+  const [classes, setClasses] = useState([]);
+  const { isOpen, setIsOpen, loading } = useContext(AuthContext);
+  // const [update, setUpdate] = useState(true);
 
-  useEffect(() => {
-    axios
-      .get("/classes")
-      .then((data) => setClasses(data.data))
-      .then((err) => console.log(err));
-  }, [update, isOpen]);
+  // useEffect(() => {
+  //   axiosSecure
+  //     .get("/classes")
+  //     .then((response) => setClasses(response.data))
+  //     .catch((error) => console.log(error));
+  // }, [update, isOpen]);
+
+  // here queryFn work as like this  get("/classes")
+
+  const { refetch } = useQuery({
+    queryKey: ["classes", loading],
+    enabled: !loading,
+    queryFn: async () => {
+      const res = await axiosSecure.get("/classes");
+      console.log("res from axios", res);
+      setClasses(res.data);
+      return res.data;
+    },
+  });
+
   return (
     <div className="h-screen p-5">
       <FeedbackModal isOpen={isOpen} setIsOpen={setIsOpen}></FeedbackModal>
@@ -25,7 +42,7 @@ const ManageClasses = () => {
               key={index}
               classItem={classItem}
               isFromManageClasses={true}
-              setUpdate={setUpdate}
+              refetch
             ></SinglePopularClass>
           ))}
       </div>

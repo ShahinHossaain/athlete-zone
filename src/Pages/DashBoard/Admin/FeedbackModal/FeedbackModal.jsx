@@ -6,6 +6,7 @@ import axios from "axios";
 
 const FeedbackModal = ({ isOpen, setIsOpen }) => {
   const { modalId } = useContext(AuthContext);
+
   const [feedback, setFeedback] = useState("");
 
   const handleFeedbackChange = (event) => {
@@ -72,7 +73,7 @@ const FeedbackModal = ({ isOpen, setIsOpen }) => {
 
         <div className="flex justify-around items-center w-full gap-5 modal-body px-4 py-2">
           <textarea
-            placeholder={modalId}
+            placeholder="give feedback"
             className="textarea textarea-bordered textarea-lg w-full max-w-xs textarea-success"
             value={feedback}
             onChange={handleFeedbackChange}
