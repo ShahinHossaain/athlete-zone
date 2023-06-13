@@ -3,7 +3,7 @@ import SinglePopularClass from "../SinglePopularClass/SinglePopularClass";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { AuthContext } from "../../../Provider/AuthProvider";
 
-const PopularClass = () => {
+const PopularClass = ({ isFromPopularClass }) => {
   const { user } = useContext(AuthContext);
   const [classes, setClasses] = useState();
   const [axiosSecure] = useAxiosSecure();
@@ -19,6 +19,7 @@ const PopularClass = () => {
               key={index}
               classItem={classItem}
               isFromManageClasses={false}
+              isFromPopularClass={isFromPopularClass}
             ></SinglePopularClass>
           ))}
       </div>

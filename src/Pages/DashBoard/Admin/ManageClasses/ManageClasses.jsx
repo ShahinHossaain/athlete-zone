@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import SinglePopularClass from "../../../Home/SinglePopularClass/SinglePopularClass";
 import FeedbackModal from "../FeedbackModal/FeedbackModal";
 import { AuthContext } from "../../../../Provider/AuthProvider";

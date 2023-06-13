@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div>
       <Banner></Banner>
-      <PopularClass></PopularClass>
+      <PopularClass isFromPopularClass={true}></PopularClass>
       <PopularInstructors></PopularInstructors>
     </div>
   );
