@@ -10,6 +10,7 @@ const ManageClasses = () => {
   const [axiosSecure] = useAxiosSecure();
   const [classes, setClasses] = useState([]);
   const { isOpen, setIsOpen, loading } = useContext(AuthContext);
+  console.log("isOOOOOPPPPEEEEN", isOpen);
   // const [update, setUpdate] = useState(true);
 
   // useEffect(() => {
@@ -25,7 +26,7 @@ const ManageClasses = () => {
     queryKey: ["classes", loading],
     enabled: !loading,
     queryFn: async () => {
-      const res = await axiosSecure.get("/classes");
+      const res = await axiosSecure.get("/classes?fromManageClasses=1");
       console.log("res from axios", res);
       setClasses(res.data);
       return res.data;

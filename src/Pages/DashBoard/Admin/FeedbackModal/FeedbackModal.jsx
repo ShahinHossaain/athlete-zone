@@ -20,7 +20,7 @@ const FeedbackModal = ({ isOpen, setIsOpen }) => {
       };
       console.log("updateData", updatedData);
       const response = await axios.patch(`/classes/${modalId}`, updatedData);
-      console.log("response", response);
+      console.log("response", response, modalId);
       if (response) {
         alert("Successfully updated");
         setIsOpen(false);
@@ -33,11 +33,12 @@ const FeedbackModal = ({ isOpen, setIsOpen }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle the feedback submission here
+
     console.log("Feedback submitted:", feedback);
     // Reset the feedback input field
     sendFeedback();
     setFeedback("");
+    setIsOpen(true);
     // Close the modal
   };
 

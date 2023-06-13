@@ -55,8 +55,8 @@ const SinglePopularClass = ({
       );
       console.log("response", response);
       if (response) {
-        alert("Successfully updated, please give feedback");
-        handleModal(_id);
+        alert("Successfully added");
+        // handleModal(_id);
         // refetch();
       }
     } catch (error) {
@@ -66,6 +66,7 @@ const SinglePopularClass = ({
 
   const handleModal = (id) => {
     setModalId(id);
+    setIsOpen(true);
   };
 
   const updateClass = async (status) => {
@@ -111,16 +112,29 @@ const SinglePopularClass = ({
     }
   };
 
+  // const handleEnroll = async (id) => {
+  //   console.log("RRRRRR", id);
+  //   const email = user.email;
+  //   try {
+  //     axios.patch(`/classEnroll/${id}?email=${email}`);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  //   // setIsChange((p) => !p);
+  //   setClasss(classs.filter((classItem) => classItem._id !== id));
+  // };
   const handleEnroll = async (id) => {
     console.log("RRRRRR", id);
     const email = user.email;
     try {
-      axios.patch(`/classEnroll/${id}?email=${email}`);
+      const response = await axios.patch(`/classEnroll/${id}?email=${email}`);
+      console.log("uuuuuuuuuuuuuu", response.data); // Access the response data here
+      // Continue with the desired logic after receiving the response
+      // setIsChange((p) => !p);
+      setClasss(classs.filter((classItem) => classItem._id !== id));
     } catch (error) {
       console.error(error);
     }
-    // setIsChange((p) => !p);
-    setClasss(classs.filter((classItem) => classItem._id !== id));
   };
 
   return (
