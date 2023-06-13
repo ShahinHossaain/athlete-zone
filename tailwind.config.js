@@ -4,6 +4,15 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  theme: {
+    fontFamily: {
+      font1: ['Rancho', "cursive"],
+      font2: ['EB Garamond', "serif"],
+      font3: ['Poppins', "sans-serif"],
+      font4: ['Work Sans', "sans-serif"]
+
+    },
+  },
   daisyui: {
     themes: [
       {

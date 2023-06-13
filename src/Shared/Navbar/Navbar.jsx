@@ -37,29 +37,33 @@ const Navbar = () => {
   };
   return (
     <div>
-      <nav className="bg-gray-100">
+      <nav className=" bg-[#ACB1D6] text-[#FFEAD2]">
         <Container>
           <div className="flex w-full items-center justify-between  py-4">
-            <div className=" text-xl font-bold mb-4 md:mb-0">Athlete Zone</div>
+            <div className="text-lg w-1/2 md:w-auto md:text-xl   font-bold md:mb-0">
+              <p className="bg-[#8294C4] p-3 rounded-xl navv text-center font-font4 uppercase text-transparent bg-clip-text bg-gradient-to-r from-[#99DBF5] to-[#A7ECEE]">
+                Athlete Zone
+              </p>
+            </div>
 
             <div className="relative w-full z-10 flex justify-end md:items-center md:w-auto">
               {/* for small device  */}
               <ul
                 className={` ${
                   isOpen ? " animate-leftToRight" : "  animate-rightToLeft"
-                }   md:hidden absolute right-10 bg-orange-800 rounded-xl p-5 text-white flex-col`}
+                }   md:hidden absolute right-10 bg-[#8294C4] navv rounded-xl p-5 w-1/2 text-white flex-col`}
               >
-                <li>
+                <li className="my-2">
                   <ActiveLink to="/">Home</ActiveLink>
                 </li>
-                <li>
+                <li className="my-2">
                   <ActiveLink to="/instructors">Instructors</ActiveLink>
                 </li>
-                <li>
+                <li className="my-2">
                   <ActiveLink to="/classes">Classes</ActiveLink>
                 </li>
                 {user && (
-                  <li>
+                  <li className="my-2">
                     <ActiveLink to="/dashboard">Dashboard</ActiveLink>
                   </li>
                 )}
@@ -78,7 +82,11 @@ const Navbar = () => {
 
                 <li>
                   {user ? (
-                    <button className="btn" onClick={handleSignOut}>
+                    <button
+                      type="button"
+                      onClick={handleSignOut}
+                      className="text-white bg-gradient-to-br from-[#46458C] to-[#99DBF5] hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+                    >
                       sign out
                     </button>
                   ) : (
@@ -89,7 +97,7 @@ const Navbar = () => {
 
               {/* for medium device or greater than that  */}
 
-              <ul className="hidden md:flex items-center space-x-5">
+              <ul className="hidden  bg-[#8294C4] md:flex items-center space-x-5 px-2 rounded-xl navv">
                 <li>
                   <ActiveLink to="/">Home</ActiveLink>
                 </li>
@@ -126,9 +134,13 @@ const Navbar = () => {
                     alt=""
                   />
                 </li>
-                <li>
+                <li className="my-auto">
                   {user ? (
-                    <button className="btn" onClick={handleSignOut}>
+                    <button
+                      type="button"
+                      onClick={handleSignOut}
+                      className="text-white bg-gradient-to-br from-[#46458C] to-[#99DBF5] hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+                    >
                       sign out
                     </button>
                   ) : (
