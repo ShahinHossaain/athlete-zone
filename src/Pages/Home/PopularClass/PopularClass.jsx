@@ -12,7 +12,7 @@ const PopularClass = ({ isFromPopularClass }) => {
     axiosSecure.get("/classes?limit=6").then((res) => setClasses(res.data));
   }, [user]);
   return (
-    <div className="mb-32">
+    <div className="my-32">
       <SectionTitle
         title="Popular Classes"
         subtitle="Join Class Now"

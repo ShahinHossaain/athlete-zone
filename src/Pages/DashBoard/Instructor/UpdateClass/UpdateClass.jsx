@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 const UpdateClass = ({ setIsModalOpen, classDetails, setUpdate }) => {
   console.log("ddddd", classDetails);
@@ -23,7 +24,13 @@ const UpdateClass = ({ setIsModalOpen, classDetails, setUpdate }) => {
       const response = await axios.patch(`/classes/${_id}`, updatedData); // Await the axios.patch call
       // Handle the response as needed
       if (response) {
-        alert("Successfully updated");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Class successfully updated",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         setIsModalOpen(false);
         setUpdate((p) => !p);
       }
@@ -34,8 +41,8 @@ const UpdateClass = ({ setIsModalOpen, classDetails, setUpdate }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-gray-300 w-1/2 p-6 rounded shadow-lg">
+    <div className="fixed w-full inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-gray-300 w-full p-6 rounded shadow-lg">
         <h2 className="text-2xl mb-4">Class Details</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">

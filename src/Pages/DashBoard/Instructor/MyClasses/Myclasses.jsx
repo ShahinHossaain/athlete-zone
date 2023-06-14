@@ -3,6 +3,7 @@ import { AuthContext } from "../../../../Provider/AuthProvider";
 // import axios from "axios";
 import SingleMyClass from "../SingleMyClass/SingleMyClass";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import SectionTitle from "../../../../Shared/SectionTitle/SectionTitle";
 
 const Myclasses = () => {
   const { user } = useContext(AuthContext);
@@ -22,10 +23,11 @@ const Myclasses = () => {
   console.log("mojid", classes);
   return (
     <div className="min-h-screen">
-      <div className="text-center">
+      {/* <div className="text-center">
         <img src={user.photoURL} alt="" className="mx-auto" />
         <p>Instructor Name: {user.displayName}</p>
-      </div>
+      </div> */}
+      <SectionTitle title="My Classes"></SectionTitle>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {classes &&
           classes.map((myClass, index) => (

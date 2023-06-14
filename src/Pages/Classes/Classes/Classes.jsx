@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import SinglePopularClass from "../../Home/SinglePopularClass/SinglePopularClass";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import SectionTitle from "../../../Shared/SectionTitle/SectionTitle";
 
 const Classes = () => {
   const [classes, setClasses] = useState();
@@ -9,7 +10,11 @@ const Classes = () => {
     axiosSecure.get("/classes").then((res) => setClasses(res.data));
   }, []);
   return (
-    <div>
+    <div className="">
+      <SectionTitle
+        title="All Classes"
+        subtitle="Make Your Strength"
+      ></SectionTitle>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {classes &&
           classes.map((classItem, index) => (

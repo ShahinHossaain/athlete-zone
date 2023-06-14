@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import SinglePopularClass from "../../../Home/SinglePopularClass/SinglePopularClass";
 import axios from "axios";
 import { AuthContext } from "../../../../Provider/AuthProvider";
+import SectionTitle from "../../../../Shared/SectionTitle/SectionTitle";
 
 const Enrolled = () => {
   const { user } = useContext(AuthContext);
@@ -64,9 +65,15 @@ const Enrolled = () => {
 
   return (
     <div className="min-h-screen">
+      <SectionTitle
+        title="Enrolled Page"
+        subtitle="You already enrolled these classes"
+      ></SectionTitle>
       <div className="grid grid-cols-3 gap-6">
         {isLoading && <p className="text-7xl">Loading</p>}
-        {!isLoading && classs.length === 0 && <p>No selected classes found.</p>}
+        {!isLoading && classs.length === 0 && (
+          <p className="text-center">No selected classes found.</p>
+        )}
         {!isLoading &&
           classs.length > 0 &&
           classs.map((classItem, index) => (

@@ -72,6 +72,7 @@ const AuthProvider = ({ children }) => {
     }
   }, [user]);
 
+  const [isNight, setIsNight] = useState(false);
   console.log(user, "role", role);
 
   const info = {
@@ -87,6 +88,8 @@ const AuthProvider = ({ children }) => {
     setModalId,
     modalId,
     role,
+    isNight,
+    setIsNight,
   };
   return <AuthContext.Provider value={info}>{children}</AuthContext.Provider>;
 };

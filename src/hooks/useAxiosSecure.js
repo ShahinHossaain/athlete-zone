@@ -4,7 +4,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
-const axiosSecure = axios.create({ baseURL: `http://localhost:3001` })
+const axiosSecure = axios.create({ baseURL: `https://assignment-12-server-plum.vercel.app` })
 
 const useAxiosSecure = () => {
     const { auth } = useContext(AuthContext)

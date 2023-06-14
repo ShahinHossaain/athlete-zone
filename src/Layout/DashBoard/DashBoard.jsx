@@ -7,11 +7,11 @@ import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const DashBoard = () => {
-  const { role } = useContext(AuthContext);
+  const { role, user } = useContext(AuthContext);
   const isAdmin = role === "admin";
   console.log("isAdmin", isAdmin);
-  const isStudent = role === "student";
-  console.log("isStudent", isStudent);
+  const isInstructor = role === "instructor";
+  // console.log("isStudent", isStudent);
 
   return (
     <div className="drawer drawer-mobile">
@@ -23,13 +23,29 @@ const DashBoard = () => {
         >
           Open drawer
         </label>
+
         <Outlet></Outlet>
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
+
         {isAdmin ? (
           <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
             {/* Sidebar content here */}
+            <li>
+              {user && (
+                <div className="text-center flex flex-col">
+                  <img
+                    src={user.photoURL}
+                    alt=""
+                    className="mx-auto w-14 h-14 rounded-full"
+                  />
+                  <p>
+                    Admin <br /> {user.displayName}
+                  </p>
+                </div>
+              )}
+            </li>
             <li>
               <ActiveLink to="/dashboard/manageClasses">
                 <SiGoogleclassroom /> Manage Classes{" "}
@@ -48,9 +64,23 @@ const DashBoard = () => {
               </ActiveLink>
             </li>
           </ul>
-        ) : isStudent ? (
+        ) : !isInstructor ? (
           <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
             {/* Sidebar content here */}
+            <li>
+              {user && (
+                <div className="text-center flex flex-col">
+                  <img
+                    src={user.photoURL}
+                    alt=""
+                    className="mx-auto w-14 h-14 rounded-full"
+                  />
+                  <p>
+                    Student <br /> {user.displayName}
+                  </p>
+                </div>
+              )}
+            </li>
             <li>
               <ActiveLink to="/dashboard/a">
                 <SiGoogleclassroom /> My Selected Classes
@@ -77,6 +107,20 @@ const DashBoard = () => {
         ) : (
           <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
             {/* Sidebar content here */}
+            <li>
+              {user && (
+                <div className="text-center flex flex-col">
+                  <img
+                    src={user.photoURL}
+                    alt=""
+                    className="mx-auto w-14 h-14 rounded-full"
+                  />
+                  <p>
+                    Instructor <br /> {user.displayName}
+                  </p>
+                </div>
+              )}
+            </li>
             <li>
               <ActiveLink to="/dashboard/addClass">
                 <SiTrainerroad />

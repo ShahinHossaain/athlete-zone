@@ -20,12 +20,16 @@
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",
     "react-awesome-button": "^7.0.5",
+    "react-awesome-reveal": "^4.2.3",
+    "react-awesome-slider": "^4.1.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.9.0",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.11.2",
-    "sort-by": "^1.2.0"
+    "scss": "^0.2.4",
+    "sort-by": "^1.2.0",
+    "sweetalert2": "^11.7.12"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

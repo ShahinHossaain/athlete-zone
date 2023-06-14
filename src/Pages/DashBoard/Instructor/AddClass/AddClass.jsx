@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../../Provider/AuthProvider";
 import axios from "axios";
+import SectionTitle from "../../../../Shared/SectionTitle/SectionTitle";
+import Swal from "sweetalert2";
 
 const AddClass = () => {
   const { user } = useContext(AuthContext);
@@ -35,7 +37,14 @@ const AddClass = () => {
       .post("/classes", classInfo)
       .then((res) => {
         console.log(res);
-        alert("Your class in pending now,,, wait for approve");
+
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your class in pending now,,, wait for approve",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         setClassImage("");
         setClassName("");
         setAvailableSeats("");
@@ -48,6 +57,10 @@ const AddClass = () => {
 
   return (
     <div className="w-full md:max-w-6xl p-10 mx-auto bg-slate-200 text-gray-500">
+      <SectionTitle
+        title="Add Class"
+        subtitle="Add Your Own Class"
+      ></SectionTitle>
       <form onSubmit={handleSubmit}>
         <div className="md:grid grid-cols-2 gap-5">
           <div className="mb-4">

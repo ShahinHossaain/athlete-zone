@@ -5,6 +5,7 @@ import { AuthContext } from "../../../../Provider/AuthProvider";
 // import axios from "axios";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import SectionTitle from "../../../../Shared/SectionTitle/SectionTitle";
 
 const ManageClasses = () => {
   const [axiosSecure] = useAxiosSecure();
@@ -35,6 +36,10 @@ const ManageClasses = () => {
 
   return (
     <div className="h-screen p-5">
+      <SectionTitle
+        title="Manage Classes"
+        subtitle="Watch With Caution"
+      ></SectionTitle>
       <FeedbackModal isOpen={isOpen} setIsOpen={setIsOpen}></FeedbackModal>
       <div className="grid md:grid-cols-3 gap-5">
         {classes &&

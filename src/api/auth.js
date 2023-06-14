@@ -3,7 +3,7 @@
 import axios from "axios";
 
 export const saveUser = (user, img) => {
-    console.log('Ussssssssser', user?.displayName, user);
+    // console.log('Ussssssssser', user?.displayName, user);
     const currentUser = {
         email: user.email,
         image: user?.photoURL ? user.photoURL : img,

@@ -4,6 +4,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import FeedbackModal from "../../DashBoard/Admin/FeedbackModal/FeedbackModal";
 import "./singlPopularClass.css";
+
+import { Slide } from "react-awesome-reveal";
+import Swal from "sweetalert2";
 const SinglePopularClass = ({
   classItem,
   isFromDashBoard,
@@ -40,7 +43,13 @@ const SinglePopularClass = ({
 
   const handleSelect = async (id) => {
     if (!user) {
-      alert("Please login first");
+      Swal.fire({
+        position: "top-end",
+        icon: "warning",
+        title: "Please Login",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       return navigate("/login", { state: location });
     }
 
@@ -55,7 +64,13 @@ const SinglePopularClass = ({
       );
       console.log("response", response);
       if (response) {
-        alert("Successfully added");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         // handleModal(_id);
         // refetch();
       }
@@ -78,7 +93,13 @@ const SinglePopularClass = ({
       const response = await axios.patch(`/classes/${_id}`, updatedData);
       console.log("response", response);
       if (response) {
-        alert("Successfully updated, please give feedback");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Successfully updated, please give feedback",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         handleModal(_id);
       }
     } catch (error) {
@@ -222,118 +243,125 @@ const SinglePopularClass = ({
     //     </div>
     //   )}
     // </div>
-
-    <div className="card bg-[#8294C4] cardd">
-      <FeedbackModal
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        feedback={feedback}
-      ></FeedbackModal>
-      <img
-        className="w-full h-2/5 rounded-t-2xl"
-        src={classImage}
-        alt={className}
-      />
-      <div className="card-body">
-        <h2 className="card-title uppercase text-xl text-transparent bg-clip-text bg-gradient-to-r from-[#99DBF5] to-[#A7ECEE] font-bold font-font2">
-          {className}
-        </h2>
-        <p className="text-[#f7dab9]">
-          <span className="text-[16px] font-semibold mr-2 uppercase font-font4">
-            Instructor :{" "}
-          </span>
-          {instructorName}
-        </p>
-        <p className="text-[#f7dab9]">
-          <span className="text-[16px] font-semibold mr-2 uppercase font-font4">
-            Gmail :{" "}
-          </span>
-          {instructorEmail}
-        </p>
-        <p className="text-[#f7dab9]">
-          <span className="text-[16px] font-semibold mr-2 uppercase font-font4">
-            Available Seats :{" "}
-          </span>
-          {availableSeats}
-        </p>
-        <p className="text-[#f7dab9]">
-          <span className="text-[16px] font-semibold mr-2 uppercase font-font4">
-            Price :{" "}
-          </span>
-          {price}
-        </p>
-        <p className="text-[#f7dab9]">
-          <span className="text-[16px] font-semibold mr-2 uppercase font-font4">
-            Enrolled :{" "}
-          </span>
-          {enrolled}
-        </p>
-        {isFromManageClasses && <p>status: {status}</p>}
-        <div className="card-actions justify-end">
-          {role !== "instructor" && (
-            <div className="px-6 pb-4">
-              {isFromManageClasses ? (
-                <div>
-                  <div className="flex gap-2">
-                    <button
-                      disabled={isApproveDenyDisabled}
-                      onClick={() => {
-                        handleApprove(_id);
-                      }}
-                      className="btn btn-primary w-1/2"
-                    >
-                      Approve
-                    </button>
-                    <button
-                      disabled={isApproveDenyDisabled}
-                      onClick={() => {
-                        handleDeny(_id);
-                      }}
-                      className="btn btn-primary w-1/2"
-                    >
-                      Deny
-                    </button>
-                  </div>
-
-                  <button
-                    onClick={() => handleModal(_id)}
-                    className="btn btn-primary mt-2 w-full btn-sm"
-                  >
-                    {feedback ? "modify feedback" : "feedback"}
-                  </button>
-                </div>
-              ) : isFromDashBoard ? (
-                !buttonHide && (
+    <Slide delay={10}>
+      <div
+        className={`card bg-[#8294C4] ${
+          isFromManageClasses ? "h-[700px]" : "h-[600px]"
+        }  cardd`}
+      >
+        <FeedbackModal
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          feedback={feedback}
+        ></FeedbackModal>
+        <figure className="h-2/5">
+          <img
+            className="w-full h-full rounded-t-2xl"
+            src={classImage}
+            alt={className}
+          />
+        </figure>
+        <div className="card-body">
+          <h2 className="card-title uppercase text-xl text-transparent bg-clip-text bg-gradient-to-r from-[#99DBF5] to-[#A7ECEE] font-bold font-font2">
+            {className}
+          </h2>
+          <p className="text-[#f7dab9]">
+            <span className="text-[16px] font-semibold mr-2 uppercase font-font4">
+              Instructor :{" "}
+            </span>
+            {instructorName}
+          </p>
+          <p className="text-[#f7dab9]">
+            <span className="text-[16px] font-semibold mr-2 uppercase font-font4">
+              Gmail :{" "}
+            </span>
+            {instructorEmail}
+          </p>
+          <p className="text-[#f7dab9]">
+            <span className="text-[16px] font-semibold mr-2 uppercase font-font4">
+              Available Seats :{" "}
+            </span>
+            {availableSeats}
+          </p>
+          <p className="text-[#f7dab9]">
+            <span className="text-[16px] font-semibold mr-2 uppercase font-font4">
+              Price :{" "}
+            </span>
+            {price}
+          </p>
+          <p className="text-[#f7dab9]">
+            <span className="text-[16px] font-semibold mr-2 uppercase font-font4">
+              Enrolled :{" "}
+            </span>
+            {enrolled}
+          </p>
+          {isFromManageClasses && <p>status: {status}</p>}
+          <div className="card-actions justify-start">
+            {role !== "instructor" && (
+              <div className="">
+                {isFromManageClasses ? (
                   <div>
+                    <div className="flex gap-2  mx-auto">
+                      <button
+                        disabled={isApproveDenyDisabled}
+                        onClick={() => {
+                          handleApprove(_id);
+                        }}
+                        className="btn btn-primary w-1/2"
+                      >
+                        Approve
+                      </button>
+                      <button
+                        disabled={isApproveDenyDisabled}
+                        onClick={() => {
+                          handleDeny(_id);
+                        }}
+                        className="btn btn-primary w-1/2"
+                      >
+                        Deny
+                      </button>
+                    </div>
+
                     <button
-                      onClick={() => handleEnroll(_id)}
-                      className="btn btn-primary"
+                      onClick={() => handleModal(_id)}
+                      className="btn btn-primary mt-2 w-full btn-sm"
                     >
-                      Enroll
-                    </button>
-                    <button
-                      onClick={() => handleDelete(_id)}
-                      className="btn btn-primary ml-5"
-                    >
-                      Delete
+                      {feedback ? "modify feedback" : "feedback"}
                     </button>
                   </div>
-                )
-              ) : (
-                ((!isFromPopularClass && role === "student") || !role) && (
-                  <button
-                    onClick={() => handleSelect(_id)}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                  >
-                    Select
-                  </button>
-                )
-              )}
-            </div>
-          )}
+                ) : isFromDashBoard ? (
+                  !buttonHide && (
+                    <div className="flex justify-between mt-5 mr-5">
+                      <button
+                        onClick={() => handleEnroll(_id)}
+                        className="btn btn-primary"
+                      >
+                        Enroll
+                      </button>
+                      <button
+                        onClick={() => handleDelete(_id)}
+                        className="btn btn-primary ml-5"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  )
+                ) : (
+                  ((!isFromPopularClass && role === "student") || !role) && (
+                    <button
+                      onClick={() => handleSelect(_id)}
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      Select
+                    </button>
+                  )
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </Slide>
   );
 };
 
