@@ -15,7 +15,7 @@ const Banner = () => {
   const backgroundImage3 =
     "https://img.freepik.com/free-vector/variety-sports-vector-silhouette-illustration-set-isolated-white-background_8130-2035.jpg?size=626&ext=jpg";
   return (
-    <div>
+    <div className="relative z-10">
       <AutoplaySlider
         play={true}
         cancelOnInteraction={false} // should stop playing on user interaction

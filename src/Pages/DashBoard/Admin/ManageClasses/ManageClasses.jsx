@@ -33,6 +33,7 @@ const ManageClasses = () => {
       return res.data;
     },
   });
+  console.log(refetch);
 
   return (
     <div className="h-screen p-5">
