@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import SinglePopularClass from "../SinglePopularClass/SinglePopularClass";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import SectionTitle from "../../../Shared/SectionTitle/SectionTitle";
 
 const PopularClass = ({ isFromPopularClass }) => {
   const { user } = useContext(AuthContext);
@@ -11,8 +12,12 @@ const PopularClass = ({ isFromPopularClass }) => {
     axiosSecure.get("/classes?limit=6").then((res) => setClasses(res.data));
   }, [user]);
   return (
-    <div>
-      <div className="grid grid-cols-3">
+    <div className="mb-32">
+      <SectionTitle
+        title="Popular Classes"
+        subtitle="Join Class Now"
+      ></SectionTitle>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {classes &&
           classes.map((classItem, index) => (
             <SinglePopularClass

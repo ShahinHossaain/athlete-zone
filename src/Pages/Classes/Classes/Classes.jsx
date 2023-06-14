@@ -10,7 +10,7 @@ const Classes = () => {
   }, []);
   return (
     <div>
-      <div className="grid grid-cols-3 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {classes &&
           classes.map((classItem, index) => (
             <SinglePopularClass

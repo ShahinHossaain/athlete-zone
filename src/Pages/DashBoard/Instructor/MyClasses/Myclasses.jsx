@@ -11,7 +11,7 @@ const Myclasses = () => {
   const [update, setUpdate] = useState(true);
   useEffect(() => {
     axiosSecure
-      .get(`classes?email=${user.email}`)
+      .get(`classes?email=${user.email}&all=all`)
       .then((response) => {
         setClasses(response.data);
       })
@@ -19,6 +19,7 @@ const Myclasses = () => {
         console.log(error);
       });
   }, [update]);
+  console.log("mojid", classes);
   return (
     <div className="min-h-screen">
       <div className="text-center">

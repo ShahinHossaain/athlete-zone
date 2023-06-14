@@ -3,7 +3,7 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import FeedbackModal from "../../DashBoard/Admin/FeedbackModal/FeedbackModal";
-
+import "./singlPopularClass.css";
 const SinglePopularClass = ({
   classItem,
   isFromDashBoard,
@@ -28,7 +28,7 @@ const SinglePopularClass = ({
     instructorEmail,
     availableSeats,
     price,
-    enrolledCount,
+    enrolled,
     _id,
     status,
     feedback,
@@ -138,89 +138,201 @@ const SinglePopularClass = ({
   };
 
   return (
-    <div className="relative max-w-sm bg-gray-300 rounded overflow-hidden shadow-lg">
+    // <div className="relative max-w-sm bg-gray-300 rounded overflow-hidden shadow-lg">
+    //   <FeedbackModal
+    //     isOpen={isOpen}
+    //     setIsOpen={setIsOpen}
+    //     feedback={feedback}
+    //   ></FeedbackModal>
+    //   <img className="w-full h-2/5" src={classImage} alt={className} />
+    //   <div className="relative px-6 py-4">
+    //     <div className="font-bold text-xl mb-2">{className}</div>
+    //     <p className="text-gray-700 text-base mb-2">
+    //       Instructor: {instructorName}
+    //     </p>
+    //     <p className="text-gray-700 text-base mb-2">Gmail: {instructorEmail}</p>
+    //     <p className="text-gray-700 text-base mb-2">
+    //       Available Seats: {availableSeats}
+    //     </p>
+    //     <p className="text-gray-700 text-base mb-2">Price: {price}</p>
+    //     <p className="text-gray-700 text-base">Enrolled: {enrolledCount}</p>
+    //     {/* TODO: enable this comment  */}
+    //     {/* {isFromManageClasses && <p>status: {status}</p>} */}
+    //     {<p>status: {status}</p>}
+    //   </div>
+    //   {role !== "instructor" && (
+    //     <div className="px-6 pb-4">
+    //       {isFromManageClasses ? (
+    //         <div>
+    //           <div className="flex gap-2">
+    //             <button
+    //               disabled={isApproveDenyDisabled}
+    //               onClick={() => {
+    //                 handleApprove(_id);
+    //               }}
+    //               className="btn btn-primary w-1/2"
+    //             >
+    //               Approve
+    //             </button>
+    //             <button
+    //               disabled={isApproveDenyDisabled}
+    //               onClick={() => {
+    //                 handleDeny(_id);
+    //               }}
+    //               className="btn btn-primary w-1/2"
+    //             >
+    //               Deny
+    //             </button>
+    //           </div>
+
+    //           <button
+    //             onClick={() => handleModal(_id)}
+    //             className="btn btn-primary mt-2 w-full btn-sm"
+    //           >
+    //             {feedback ? "modify feedback" : "feedback"}
+    //           </button>
+    //         </div>
+    //       ) : isFromDashBoard ? (
+    //         !buttonHide && (
+    //           <div>
+    //             <button
+    //               onClick={() => handleEnroll(_id)}
+    //               className="btn btn-primary"
+    //             >
+    //               Enroll
+    //             </button>
+    //             <button
+    //               onClick={() => handleDelete(_id)}
+    //               className="btn btn-primary ml-5"
+    //             >
+    //               Delete
+    //             </button>
+    //           </div>
+    //         )
+    //       ) : (
+    //         ((!isFromPopularClass && role === "student") || !role) && (
+    //           <button
+    //             onClick={() => handleSelect(_id)}
+    //             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    //           >
+    //             Select
+    //           </button>
+    //         )
+    //       )}
+    //     </div>
+    //   )}
+    // </div>
+
+    <div className="card bg-[#8294C4] cardd">
       <FeedbackModal
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         feedback={feedback}
       ></FeedbackModal>
-      <img className="w-full h-2/5" src={classImage} alt={className} />
-      <div className="relative px-6 py-4">
-        <div className="font-bold text-xl mb-2">{className}</div>
-        <p className="text-gray-700 text-base mb-2">
-          Instructor: {instructorName}
+      <img
+        className="w-full h-2/5 rounded-t-2xl"
+        src={classImage}
+        alt={className}
+      />
+      <div className="card-body">
+        <h2 className="card-title uppercase text-xl text-transparent bg-clip-text bg-gradient-to-r from-[#99DBF5] to-[#A7ECEE] font-bold font-font2">
+          {className}
+        </h2>
+        <p className="text-[#f7dab9]">
+          <span className="text-[16px] font-semibold mr-2 uppercase font-font4">
+            Instructor :{" "}
+          </span>
+          {instructorName}
         </p>
-        <p className="text-gray-700 text-base mb-2">Gmail: {instructorEmail}</p>
-        <p className="text-gray-700 text-base mb-2">
-          Available Seats: {availableSeats}
+        <p className="text-[#f7dab9]">
+          <span className="text-[16px] font-semibold mr-2 uppercase font-font4">
+            Gmail :{" "}
+          </span>
+          {instructorEmail}
         </p>
-        <p className="text-gray-700 text-base mb-2">Price: {price}</p>
-        <p className="text-gray-700 text-base">Enrolled: {enrolledCount}</p>
-        {/* TODO: enable this comment  */}
-        {/* {isFromManageClasses && <p>status: {status}</p>} */}
-        {<p>status: {status}</p>}
-      </div>
-      {role !== "instructor" && (
-        <div className="px-6 pb-4">
-          {isFromManageClasses ? (
-            <div>
-              <div className="flex gap-2">
-                <button
-                  disabled={isApproveDenyDisabled}
-                  onClick={() => {
-                    handleApprove(_id);
-                  }}
-                  className="btn btn-primary w-1/2"
-                >
-                  Approve
-                </button>
-                <button
-                  disabled={isApproveDenyDisabled}
-                  onClick={() => {
-                    handleDeny(_id);
-                  }}
-                  className="btn btn-primary w-1/2"
-                >
-                  Deny
-                </button>
-              </div>
+        <p className="text-[#f7dab9]">
+          <span className="text-[16px] font-semibold mr-2 uppercase font-font4">
+            Available Seats :{" "}
+          </span>
+          {availableSeats}
+        </p>
+        <p className="text-[#f7dab9]">
+          <span className="text-[16px] font-semibold mr-2 uppercase font-font4">
+            Price :{" "}
+          </span>
+          {price}
+        </p>
+        <p className="text-[#f7dab9]">
+          <span className="text-[16px] font-semibold mr-2 uppercase font-font4">
+            Enrolled :{" "}
+          </span>
+          {enrolled}
+        </p>
+        {isFromManageClasses && <p>status: {status}</p>}
+        <div className="card-actions justify-end">
+          {role !== "instructor" && (
+            <div className="px-6 pb-4">
+              {isFromManageClasses ? (
+                <div>
+                  <div className="flex gap-2">
+                    <button
+                      disabled={isApproveDenyDisabled}
+                      onClick={() => {
+                        handleApprove(_id);
+                      }}
+                      className="btn btn-primary w-1/2"
+                    >
+                      Approve
+                    </button>
+                    <button
+                      disabled={isApproveDenyDisabled}
+                      onClick={() => {
+                        handleDeny(_id);
+                      }}
+                      className="btn btn-primary w-1/2"
+                    >
+                      Deny
+                    </button>
+                  </div>
 
-              <button
-                onClick={() => handleModal(_id)}
-                className="btn btn-primary mt-2 w-full btn-sm"
-              >
-                {feedback ? "modify feedback" : "feedback"}
-              </button>
+                  <button
+                    onClick={() => handleModal(_id)}
+                    className="btn btn-primary mt-2 w-full btn-sm"
+                  >
+                    {feedback ? "modify feedback" : "feedback"}
+                  </button>
+                </div>
+              ) : isFromDashBoard ? (
+                !buttonHide && (
+                  <div>
+                    <button
+                      onClick={() => handleEnroll(_id)}
+                      className="btn btn-primary"
+                    >
+                      Enroll
+                    </button>
+                    <button
+                      onClick={() => handleDelete(_id)}
+                      className="btn btn-primary ml-5"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                )
+              ) : (
+                ((!isFromPopularClass && role === "student") || !role) && (
+                  <button
+                    onClick={() => handleSelect(_id)}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  >
+                    Select
+                  </button>
+                )
+              )}
             </div>
-          ) : isFromDashBoard ? (
-            !buttonHide && (
-              <div>
-                <button
-                  onClick={() => handleEnroll(_id)}
-                  className="btn btn-primary"
-                >
-                  Enroll
-                </button>
-                <button
-                  onClick={() => handleDelete(_id)}
-                  className="btn btn-primary ml-5"
-                >
-                  Delete
-                </button>
-              </div>
-            )
-          ) : (
-            ((!isFromPopularClass && role === "student") || !role) && (
-              <button
-                onClick={() => handleSelect(_id)}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              >
-                Select
-              </button>
-            )
           )}
         </div>
-      )}
+      </div>
     </div>
   );
 };

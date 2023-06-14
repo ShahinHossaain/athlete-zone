@@ -1,5 +1,6 @@
 const Instructors = ({ instructor }) => {
-  const { imageUrl, instructorName, email, numClasses, classes } = instructor;
+  const { imageUrl, name, email, numClasses, classes } = instructor;
+  console.log("insss", instructor);
   return (
     <div className="flex  w-full bg-gray-700 border border-gray-200 rounded-lg shadow md:flex-row  mx-auto hover:bg-gray-500">
       <div className="flex w-[70%]   h-60 gap-y-10 items-center ">
@@ -11,11 +12,11 @@ const Instructors = ({ instructor }) => {
           />
         </div>
         <div className="grid grid-cols-1 text-center w-[60%] p-4 leading-normal text-white">
-          <p>Name : {instructorName}</p>
+          <p>Name : {name} </p>
 
           <p>Email : {email}</p>
 
-          <p>Number of Classes : ${numClasses}</p>
+          <p>Number offf Classes : ${numClasses}</p>
         </div>
       </div>
 

@@ -93,6 +93,10 @@ function Register() {
       import.meta.env.VITE_profile_img
     }`;
     console.log("Url", Url);
+
+    const usersave = () => {
+      saveUser(user, image);
+    };
     fetch(Url, {
       method: "POST",
       body: formData,
@@ -113,7 +117,8 @@ function Register() {
                 photoURL: imgData.data.display_url,
               });
 
-              saveUser(result.user, imgData.data.display_url);
+              usersave(imgData.data.display_url);
+              // saveUser(result.user, imgData.data.display_url);
               navigate(location?.state?.pathname || "/");
             })
             .catch((error) => alert(error));

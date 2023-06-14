@@ -5,6 +5,7 @@ import ActiveLink from "../../Component/ActiveLink/ActiveLink";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { signOut } from "firebase/auth";
 import Container from "../Container/Container";
+import Button from "../Button/Button";
 
 const Navbar = () => {
   const { user, auth, role } = useContext(AuthContext);
@@ -82,13 +83,9 @@ const Navbar = () => {
 
                 <li>
                   {user ? (
-                    <button
-                      type="button"
-                      onClick={handleSignOut}
-                      className="text-white bg-gradient-to-br from-[#46458C] to-[#99DBF5] hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
-                    >
-                      sign out
-                    </button>
+                    <div onClick={handleSignOut}>
+                      <Button> sign Out</Button>
+                    </div>
                   ) : (
                     <ActiveLink to="/login">Login</ActiveLink>
                   )}
