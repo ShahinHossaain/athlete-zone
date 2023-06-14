@@ -122,15 +122,31 @@ const SinglePopularClass = ({
   const handleDelete = async (id) => {
     console.log(id);
     const email = user.email;
-    const updatedClasss = classs.filter((classItem) => classItem._id !== id);
-    setClasss(updatedClasss);
+
     // setReFetchh((prev) => !prev); // Trigger re-render in MySelectedClasses component
-    try {
-      await axios.delete(`/classDelete/${id}?email=${email}`);
-      alert("deleted");
-    } catch (error) {
-      console.error(error);
-    }
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(`/classDelete/${id}?email=${email}`);
+          const updatedClasss = classs.filter(
+            (classItem) => classItem._id !== id
+          );
+          setClasss(updatedClasss);
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    });
   };
 
   // const handleEnroll = async (id) => {
@@ -153,6 +169,13 @@ const SinglePopularClass = ({
       // Continue with the desired logic after receiving the response
       // setIsChange((p) => !p);
       setClasss(classs.filter((classItem) => classItem._id !== id));
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "successfully enrolled",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (error) {
       console.error(error);
     }

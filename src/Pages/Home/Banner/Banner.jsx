@@ -40,11 +40,11 @@ const Banner = () => {
               <p className="text-2xl md:text-5xl font-font2">
                 Welcome to, <br />{" "}
                 <span className="block font-font1  md:my-10 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-                  Joy Full Play Things
+                  ATHLETE ZONE
                 </span>{" "}
                 website,{" "}
-                <Link to="/allToys">
-                  <AwesomeButton>Toys Details</AwesomeButton>
+                <Link to="/classes">
+                  <AwesomeButton>All Classes</AwesomeButton>
                 </Link>
               </p>
             </div>
@@ -65,13 +65,13 @@ const Banner = () => {
             />
             <div className="md:relative box w-1/2 right-32 rounded-3xl top-8 p-5 md:p-10 bg-slate-700 opacity-90  text-white">
               <p className="text-2xl md:text-5xl font-font2">
-                Your, <br />{" "}
+                Our, <br />{" "}
                 <span className="block text-2xl md:text-6xl font-font1 md:my-10 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-                  One-Stop Shop
+                  best Of Best
                 </span>{" "}
-                for Fun,{" "}
-                <Link to="/myToys">
-                  <AwesomeButton>See Own Toys</AwesomeButton>
+                for Instructor,{" "}
+                <Link to="/instructors">
+                  <AwesomeButton>instructor</AwesomeButton>
                 </Link>
               </p>
             </div>
@@ -94,10 +94,10 @@ const Banner = () => {
               <p className="text-2xl md:text-5xl my-5 font-font2">
                 A World of, <br />
                 <span className="block font-font1 mb-5 md:my-10 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-                  Toys and Delight
+                  Sports
                 </span>{" "}
-                <Link to="/addToy">
-                  <AwesomeButton>Add Your Toy</AwesomeButton>
+                <Link to="/dashboard">
+                  <AwesomeButton>Go to Dashboard</AwesomeButton>
                 </Link>
               </p>
             </div>
