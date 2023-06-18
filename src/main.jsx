@@ -12,7 +12,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
 // axios
-axios.defaults.baseURL = "https://assignment-12-server-plum.vercel.app";
+axios.defaults.baseURL = "http://localhost:3001/";
 
 // axios.interceptors.response.use(
 //   (res) => {

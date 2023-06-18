@@ -85,7 +85,7 @@ function Login() {
   return (
     <div className="flex flex-col-reverse  md:flex-row-reverse justify-center items-center bg-cover">
       <Helmet>
-        <title>Joy Full Play Things | Login</title>
+        <title>Athlete Zone | Login</title>
       </Helmet>
       <div>
         <img

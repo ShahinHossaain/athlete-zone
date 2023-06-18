@@ -4,9 +4,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import FeedbackModal from "../../DashBoard/Admin/FeedbackModal/FeedbackModal";
 import "./singlPopularClass.css";
-
 import { Slide } from "react-awesome-reveal";
 import Swal from "sweetalert2";
+import ModalEnroll from "../../DashBoard/Student/ModalEnroll/ModalEnroll";
 const SinglePopularClass = ({
   classItem,
   isFromDashBoard,
@@ -361,6 +361,9 @@ const SinglePopularClass = ({
                       >
                         Enroll
                       </button>
+
+                      <ModalEnroll id={_id}></ModalEnroll>
+
                       <button
                         onClick={() => handleDelete(_id)}
                         className="btn btn-primary ml-5"
