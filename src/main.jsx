@@ -12,7 +12,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
 // axios
-axios.defaults.baseURL = "http://localhost:3001/";
+axios.defaults.baseURL = "https://athlete-zone-server.onrender.com";
 
 // axios.interceptors.response.use(
 //   (res) => {

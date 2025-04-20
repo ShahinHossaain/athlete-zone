@@ -17,15 +17,7 @@ const Instructors = ({ instructor }) => {
     axios.get(`/class?email=${email}`).then((res) => setClasses(res.data));
   }, []);
 
-  // const callClasses = async () => {
-  //   try {
-  //     const res = await axios.get(`/class?email=${email}`);
-  //     setClasses(res.data);
-  //   } catch (error) {
-  //     console.error("Error fetching classes:", error);
-  //   }
-  // };
-  // callClasses();
+
 
   const navigate = useNavigate();
   const handleSeeAll = () => {
