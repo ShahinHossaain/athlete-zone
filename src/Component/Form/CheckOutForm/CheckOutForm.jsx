@@ -2,21 +2,31 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import "./CheckOutForm.css";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
-import axios from "axios";
-export const CheckoutForm = ({ closeModal, price }) => {
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+export const CheckoutForm = ({
+  closeModal,
+  price,
+  handleEnroll,
+  classDetails,
+}) => {
   const stripe = useStripe();
   const elements = useElements();
+
+
   const [cardError, setCardError] = useState();
   const [clientSecret, setClientSecret] = useState();
   const { user } = useContext(AuthContext);
-  console.log(user);
+  const [axiosSecure] = useAxiosSecure();
+  const [history, setHistory] = useState();
 
   useEffect(() => {
     if (price) {
-      axios.post("/create-payment-intent", { price: price }).then((res) => {
-        console.log(res.data.clientSecret);
-        setClientSecret("megic man", res.data.clientSecret);
-      });
+      axiosSecure
+        .post("/create-payment-intent", { price: price })
+        .then((res) => {
+          setClientSecret(res.data.clientSecret);
+        });
     }
   }, [price]);
   const handleSubmit = async (event) => {
@@ -45,10 +55,9 @@ export const CheckoutForm = ({ closeModal, price }) => {
     });
 
     if (error) {
-      console.log("[error]", error);
       setCardError(error.message);
     } else {
-      console.log("[PaymentMethod]", paymentMethod);
+      handleEnroll(classDetails._id, classDetails.availableSeats);
     }
 
     //   confirm payment
@@ -62,6 +71,37 @@ export const CheckoutForm = ({ closeModal, price }) => {
           },
         },
       });
+    if (confirmError) {
+      setCardError(confirmError.message);
+    } else {
+      if (paymentIntent.status === "succeeded") {
+        // save payment information in mongodb
+        const paymentInfo = {
+          transactionId: paymentIntent.id,
+          date: new Date(),
+        };
+        console.log("paymentInfo", paymentInfo);
+        const data = {
+          classId: classDetails._id,
+          className: classDetails.className,
+          price: classDetails.price,
+          name: user.displayName,
+          email: user.email,
+          ...paymentInfo,
+        };
+
+        axiosSecure
+          .post("/enrolled", data)
+          .then((response) => {
+            // Handle the response
+            console.log(":", response.data);
+          })
+          .catch((error) => {
+            // Handle the error
+            console.error(error);
+          });
+      }
+    }
   };
 
   return (
@@ -96,7 +136,7 @@ export const CheckoutForm = ({ closeModal, price }) => {
             type="submit"
             disabled={!stripe}
             className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ml-5"
-            //   onClick={() => handlePayment(id)}
+          //   onClick={() => handlePayment(id)}
           >
             Pay ${price}
             {/* pay */}

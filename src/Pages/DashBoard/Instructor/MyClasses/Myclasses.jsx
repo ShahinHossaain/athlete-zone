@@ -28,7 +28,7 @@ const Myclasses = () => {
         <p>Instructor Name: {user.displayName}</p>
       </div> */}
       <SectionTitle title="My Classes"></SectionTitle>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div className="grid gap-4 grid-cols-1  md:grid-cols-2 md:gap-10 lg:grid-cols-3 lg:gap-3  xl:grid-cols-4 xl:gap-5 2xl:gap-10">
         {classes &&
           classes.map((myClass, index) => (
             <SingleMyClass

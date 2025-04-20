@@ -1,7 +1,7 @@
 import Container from "../Container/Container";
 const Footer = () => {
   return (
-    <div>
+    <div className="mt-14">
       <Container>
         <footer className="md:flex justify-around  bg-neutral text-neutral-content">
           <div className="md:flex justify-end px-32 py-12 bg-slate-800 w-full">

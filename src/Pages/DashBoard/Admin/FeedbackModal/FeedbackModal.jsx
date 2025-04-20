@@ -42,7 +42,6 @@ const FeedbackModal = ({ isOpen, setIsOpen }) => {
     // Close the modal
   };
 
-  console.log("iddd", modalId);
   if (!isOpen) {
     return null;
   }

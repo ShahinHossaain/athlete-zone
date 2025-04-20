@@ -12,12 +12,6 @@ const useAxiosSecure = () => {
     useEffect(() => {
         // 1.intercept req 
         axiosSecure.interceptors.request.use(config => {
-            // axios
-            // .get("/classes", {
-            //   headers: {
-            //     authorization: `bearer ${localStorage.getItem("access_token")}`,
-            //   },
-            // })here config is containing this headers part
             const token = `Bearer ${localStorage.getItem("access_token")}`;
             if (token) {
                 config.headers.Authorization = token;

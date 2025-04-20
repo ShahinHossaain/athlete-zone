@@ -8,6 +8,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 
 const DashBoard = () => {
   const { role, user } = useContext(AuthContext);
+  console.log("user", user);
   const isAdmin = role === "admin";
   console.log("isAdmin", isAdmin);
   const isInstructor = role === "instructor";
@@ -80,6 +81,11 @@ const DashBoard = () => {
                   </p>
                 </div>
               )}
+            </li>
+            <li>
+              <ActiveLink to="/classes">
+                <SiGoogleclassroom /> All classes
+              </ActiveLink>
             </li>
             <li>
               <ActiveLink to="/dashboard/a">

@@ -15,9 +15,9 @@ import { FaGoogle } from "react-icons/fa";
 import { saveUser } from "../../api/auth";
 
 function Register() {
-  const { createUser, auth, user, setLoading } = useContext(AuthContext);
-  console.log(user);
-  console.log("imgagef", import.meta.env.VITE_profile_img);
+  const { createUser, auth, setLoading } = useContext(AuthContext);
+  // const {add} = useContext(AuthProvider);
+
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -75,12 +75,12 @@ function Register() {
   };
 
   const usersave = (user, image) => {
+
     saveUser(user, image);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // console.log("Name:", name);
     // console.log("Email:", email);
     // console.log("Password:", password);
     // console.log("Password:", photoURL);
@@ -93,11 +93,8 @@ function Register() {
 
     const formData = new FormData();
     formData.append("image", image);
-    console.log(formData);
-    const Url = `https://api.imgbb.com/1/upload?key=${
-      import.meta.env.VITE_profile_img
-    }`;
-    console.log("Url", Url);
+    const Url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_profile_img
+      }`;
     fetch(Url, {
       method: "POST",
       body: formData,
@@ -106,14 +103,12 @@ function Register() {
       .then((imgData) => {
         if (imgData.success) {
           // setPhotoURL(imgData.data.display_url);
-          console.log("taatata", imgData.data.display_url);
 
           // start
           createUser(email, password)
-            .then((result) => {
-              console.log(result.user);
+            .then(async (result) => {
 
-              updateProfile(auth.currentUser, {
+              await updateProfile(auth.currentUser, {
                 displayName: name,
                 photoURL: imgData.data.display_url,
               });
@@ -124,17 +119,15 @@ function Register() {
             })
             .catch((error) => {
               alert(error);
-              console.log("ekhan theke");
             });
           // end
         }
       })
       .catch((err) => {
+        console.log(err);
         setLoading(false);
-        console.log(err.message);
       });
 
-    console.log("paddu", image);
 
     // TODO: Add logic to submit the form data
   };
@@ -143,14 +136,12 @@ function Register() {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
-  console.log(password, confirmPassword);
 
   const googleProvider = new GoogleAuthProvider();
 
   const handleGoogleSingIn = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
-        console.log(result.user);
         saveUser(result.user);
         navigate(location?.state?.pathname || "/", { replace: true });
       })
@@ -198,9 +189,8 @@ function Register() {
             Email
           </label>
           <input
-            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10 mr-5 ${
-              emailError ? "border-b-red-500" : "border-b-green-500"
-            }`}
+            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10 mr-5 ${emailError ? "border-b-red-500" : "border-b-green-500"
+              }`}
             id="email"
             type="email"
             name="email"
@@ -237,9 +227,8 @@ function Register() {
             Password
           </label>
           <input
-            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10 ${
-              error ? "border-b-red-500" : "border-b-green-500"
-            }`}
+            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10 ${error ? "border-b-red-500" : "border-b-green-500"
+              }`}
             id="password"
             name="password"
             type={showPassword ? "text" : "password"}

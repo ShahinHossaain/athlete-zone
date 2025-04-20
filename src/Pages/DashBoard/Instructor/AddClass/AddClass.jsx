@@ -13,16 +13,81 @@ const AddClass = () => {
   const instructorName = user.displayName;
   const instructorEmail = user.email;
 
-  const [classImage, setClassImage] = useState("");
   const [className, setClassName] = useState("");
   const [availableSeats, setAvailableSeats] = useState("");
   const [price, setPrice] = useState("");
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const image = event.target.photoURL.files[0];
+
+
+  //   const classInfo = {
+  //     classImage,
+  //     className,
+  //     instructorName,
+  //     instructorEmail,
+  //     availableSeats,
+  //     price,
+  //     userEmail,
+  //     status: "pending",
+  //   };
+
+  //   // new added 
+  //   const createImage = async () => {
+  //     const formData = new FormData();
+  //     formData.append("image", image);
+  //     const Url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_profile_img
+  //       }`;
+  //     await fetch(Url, {
+  //       method: "POST",
+  //       body: formData,
+  //     })
+  //       .then((res) => res.json())
+  //       .then((imgData) => {
+  //         if (imgData.success) {
+  //           const imgURL = imgData.data.display_url;
+  //           console.log(imgURL);
+  //           setClassImage(imgURL);
+  //           classInfo.classImage = imgURL;
+  //           console.log("place 1: ", classInfo);
+  //         }
+  //       })
+  //   }
+
+  //   createImage();
+
+  //   console.log("place 2: ", classInfo);
+
+  //   axios
+  //     .post("/classes", classInfo)
+  //     .then((res) => {
+  //       console.log(res);
+
+  //       Swal.fire({
+  //         position: "top-end",
+  //         icon: "success",
+  //         title: "Your class in pending now,,, wait for approve",
+  //         showConfirmButton: false,
+  //         timer: 1500,
+  //       });
+  //       setClassImage("");
+  //       setClassName("");
+  //       setAvailableSeats("");
+  //       setPrice("");
+  //     })
+  //     .catch((err) => console.log(err));
+
+  //   // Add your fetch or API call logic here
+  // };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const image = e.target.photoURL.files[0]; // তোমার আগের কোডে event → e করা হয়েছে
+
     const classInfo = {
-      classImage,
+      classImage: "", // এখানেই initial value দিচ্ছি, পরে সেট করা হবে
       className,
       instructorName,
       instructorEmail,
@@ -31,28 +96,47 @@ const AddClass = () => {
       userEmail,
       status: "pending",
     };
-    console.log(classInfo);
 
-    axios
-      .post("/classes", classInfo)
-      .then((res) => {
-        console.log(res);
+    try {
+      // 1. Upload image to imgbb
+      const formData = new FormData();
+      formData.append("image", image);
+      const Url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_profile_img}`;
+
+      const response = await fetch(Url, {
+        method: "POST",
+        body: formData,
+      });
+
+      const imgData = await response.json();
+
+      if (imgData.success) {
+        const imgURL = imgData.data.display_url;
+        console.log("Uploaded Image URL:", imgURL);
+        classInfo.classImage = imgURL;
+
+        console.log("place 1:", classInfo);
+
+        // 2. Now send class info with image URL to backend
+        const res = await axios.post("/classes", classInfo);
+        console.log("Backend Response:", res);
 
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Your class in pending now,,, wait for approve",
+          title: "Your class is now pending. Please wait for approval.",
           showConfirmButton: false,
           timer: 1500,
         });
-        setClassImage("");
+
+        // 3. Reset form fields
         setClassName("");
         setAvailableSeats("");
         setPrice("");
-      })
-      .catch((err) => console.log(err));
-
-    // Add your fetch or API call logic here
+      }
+    } catch (err) {
+      console.error("Error uploading image or submitting class info:", err);
+    }
   };
 
   return (
@@ -70,13 +154,23 @@ const AddClass = () => {
             >
               Class Image
             </label>
-            <input
+            {/* <input
               className="w-full px-3 py-2 border border-gray-300 rounded-sm"
               type="text"
               name="classImage"
               id="classImage"
               value={classImage}
               onChange={(e) => setClassImage(e.target.value)}
+              required
+            /> */}
+
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10"
+              id="photoURL"
+              name="classImage"
+              type="file"
+              placeholder="photo URL"
+              accept="photoURl/*"
               required
             />
           </div>

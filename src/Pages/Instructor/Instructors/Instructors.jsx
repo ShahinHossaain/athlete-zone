@@ -11,20 +11,24 @@ const Instructors = () => {
 
     axios.get("/users?role=instructor").then((res) => setInstructors(res.data));
   }, []);
-  console.log("kkkkk", instructors);
   return (
     <div className="flex flex-col gap-y-5 mb-32">
       <SectionTitle
         title="All Instructors"
         subtitle="Choose your favourite one"
       ></SectionTitle>
-      {instructors &&
-        instructors.map((instructor, index) => (
-          <SingleInstructor
-            key={index}
-            instructor={instructor}
-          ></SingleInstructor>
-        ))}
+
+      <div className="grid grid-cols-1  lg:grid-cols-2 gap-5">
+
+        {instructors &&
+          instructors.map((instructor, index) => (
+            <SingleInstructor
+              key={index}
+              instructor={instructor}
+            ></SingleInstructor>
+          ))}
+      </div>
+
     </div>
   );
 };

@@ -2,7 +2,6 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 const SinglePopularInstructors = ({ instructor }) => {
-  console.log("instructor", instructor);
   const { image, name, email, selectedClasses } = instructor;
   let selectedClassKeys = [];
   const [classses, setClassses] = useState([]);

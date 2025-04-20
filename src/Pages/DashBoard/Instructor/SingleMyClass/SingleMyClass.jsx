@@ -21,7 +21,7 @@ const SingleMyClass = ({ classDetails, setUpdate }) => {
   console.log(instructorEmail, user);
   setIsModalOpen, classDetails, setUpdate;
   return (
-    <Slide>
+    <Slide triggerOnce>
       <div className="relative bg-gray-300">
         {isModalOpen && (
           <UpdateClass

@@ -8,7 +8,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 const Main = () => {
   const { isNight } = useContext(AuthContext);
   return (
-    <div className={isNight && `bg-gray-900`}>
+    <div className={isNight ? `bg-gray-900` : "bg-white"}>
       <Navbar></Navbar>
 
       <Container>

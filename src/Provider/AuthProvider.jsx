@@ -19,6 +19,7 @@ const AuthProvider = ({ children }) => {
 
   const [modalId, setModalId] = useState();
   const [user, setUser] = useState();
+
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
@@ -41,7 +42,6 @@ const AuthProvider = ({ children }) => {
             email: currentUser.email,
           })
           .then((response) => {
-            console.log("resdata", response.data); // Handle the response data
             // Additional code to handle the response as needed
             localStorage.setItem("access_token", response.data);
           })
@@ -63,7 +63,6 @@ const AuthProvider = ({ children }) => {
       axios
         .get(`/users/${user?.email}`)
         .then((res) => {
-          console.log(res);
           setRole(res.data.role);
         })
         .catch((error) => {
@@ -73,7 +72,6 @@ const AuthProvider = ({ children }) => {
   }, [user]);
 
   const [isNight, setIsNight] = useState(false);
-  console.log(user, "role", role);
 
   const info = {
     user,
@@ -95,3 +93,7 @@ const AuthProvider = ({ children }) => {
 };
 
 export default AuthProvider;
+
+// {
+//   <provider info={add} />;
+// }

@@ -2,12 +2,18 @@ import { useEffect, useState } from "react";
 import SinglePopularClass from "../../Home/SinglePopularClass/SinglePopularClass";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import SectionTitle from "../../../Shared/SectionTitle/SectionTitle";
+import { useContext } from "react";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 const Classes = () => {
+  const { user } = useContext(AuthContext);
+  const email = user.email;
   const [classes, setClasses] = useState();
   const [axiosSecure] = useAxiosSecure();
   useEffect(() => {
-    axiosSecure.get("/classes").then((res) => setClasses(res.data));
+    axiosSecure
+      .get(`/classes?email=${email}`)
+      .then((res) => setClasses(res.data));
   }, []);
   return (
     <div className="">
@@ -15,7 +21,7 @@ const Classes = () => {
         title="All Classes"
         subtitle="Make Your Strength"
       ></SectionTitle>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div className="grid gap-4 grid-cols-1  md:grid-cols-2 md:gap-10 lg:grid-cols-3 lg:gap-3  xl:grid-cols-4 xl:gap-5 2xl:gap-10">
         {classes &&
           classes.map((classItem, index) => (
             <SinglePopularClass
@@ -23,6 +29,7 @@ const Classes = () => {
               classItem={classItem}
               isFromDashBoard={false}
               isFromManageClasses={false}
+              isFromPopularClass={true}
             ></SinglePopularClass>
           ))}
       </div>

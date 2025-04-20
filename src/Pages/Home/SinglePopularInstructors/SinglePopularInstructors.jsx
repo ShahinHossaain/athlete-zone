@@ -1,10 +1,10 @@
+//last update এ বাদ দেয়া হয়েছে।
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 
 const SinglePopularInstructors = ({ instructor }) => {
-  console.log("instructor", instructor);
   const { image, name, email } = instructor;
   const [classes, setClasses] = useState();
 

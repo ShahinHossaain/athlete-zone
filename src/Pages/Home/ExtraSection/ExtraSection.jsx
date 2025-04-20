@@ -1,9 +1,9 @@
 import { Slide } from "react-awesome-reveal";
 const ExtraSection = () => {
   return (
-    <Slide direction="" delay={10}>
-      <div>
-        <div className="mx-3 md:mx-20 card shadow-lg p-3 md:p-10 bg-[#8294C4] navv mt-36 mb-32">
+    <Slide triggerOnce direction="" delay={10}>
+      <div className="z-0">
+        <div className="mx-3 md:mx-20 card shadow-lg p-3 md:p-10 bg-[#8294C4] navv mt-36 mb-32 ">
           <p className="text-3xl md:text-5xl text-center o_font3 tracking-2 font-bold font-serif ">
             <span className="text-center text-5xl font-bold font-font1 text-transparent bg-clip-text bg-gradient-to-r from-[#99DBF5] to-[#A7ECEE] mb-12">
               WebSite Details{" "}

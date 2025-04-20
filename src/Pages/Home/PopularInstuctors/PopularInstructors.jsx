@@ -1,3 +1,5 @@
+//last update এ বাদ দেয়া হয়েছে।
+
 import { useEffect, useState } from "react";
 import SinglePopularInstructors from "../SinglePopularInstructors/SinglePopularInstructors";
 import axios from "axios";
@@ -14,14 +16,13 @@ const PopularInstructors = () => {
 
     axios.get("/users?role=instructor").then((res) => setInstructors(res.data));
   }, []);
-  console.log("broinstructor", instructors);
   return (
     <div>
       <SectionTitle
         title="Popular Instructors"
         subtitle="See their Classes"
       ></SectionTitle>
-      <Slide>
+      <Slide triggerOnce>
         <div className="grid grid-cols-1  md:grid-cols-2 gap-5">
           {instructors &&
             instructors.map((instructor, index) => (

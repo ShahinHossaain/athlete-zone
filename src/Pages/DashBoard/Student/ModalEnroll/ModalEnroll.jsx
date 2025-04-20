@@ -9,8 +9,7 @@ import { CheckoutForm } from "../../../../Component/Form/CheckOutForm/CheckOutFo
 const stripePromise = loadStripe(
   `${import.meta.env.VITE_payment_publishable_key}`
 );
-const ModalEnroll = ({ id }) => {
-  console.log("iidd", id);
+const ModalEnroll = ({ id, handleEnroll }) => {
   let [isOpen, setIsOpen] = useState(false);
   const [classDetails, setClassDetails] = useState([]);
   useEffect(() => {
@@ -35,12 +34,8 @@ const ModalEnroll = ({ id }) => {
   return (
     <>
       <div className="">
-        <button
-          type="button"
-          onClick={openModal}
-          className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-        >
-          Open dialog
+        <button type="button" onClick={openModal} className="btn btn-primary">
+          Enroll
         </button>
       </div>
 
@@ -84,7 +79,12 @@ const ModalEnroll = ({ id }) => {
                   </div>
                   {/* TODO : checkout form  */}
                   <Elements stripe={stripePromise}>
-                    <CheckoutForm closeModal={closeModal} price={price} />
+                    <CheckoutForm
+                      closeModal={closeModal}
+                      price={price}
+                      classDetails={classDetails}
+                      handleEnroll={handleEnroll}
+                    />
                   </Elements>
                 </Dialog.Panel>
               </Transition.Child>

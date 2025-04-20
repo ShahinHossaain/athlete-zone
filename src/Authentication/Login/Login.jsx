@@ -26,21 +26,18 @@ function Login() {
 
   const navigate = useNavigate();
   const location = useLocation();
-  console.log("++++", location?.state?.pathname);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // console.log("Email:", email);
-    // console.log("Password:", password);
+
 
     signInUser(email, password)
       .then((result) => {
         // setUser(result.user);
-        // console.log(result);
+
         const loggedUser = {
           email: result.user.email,
         };
-        console.log(loggedUser);
 
         // fetch("http://localhost:3000/jwt", {
         //   method: "POST",
@@ -51,7 +48,6 @@ function Login() {
         // })
         //   .then((res) => res.json())
         //   .then((data) => {
-        //     console.log("jwt response", data);
         //     localStorage.setItem("toy-token", data.token);
         //   });
 
@@ -71,7 +67,6 @@ function Login() {
   const handleGoogleSingIn = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
-        console.log(result.user);
         saveUser(result.user);
         navigate(location?.state?.pathname || "/", { replace: true });
       })

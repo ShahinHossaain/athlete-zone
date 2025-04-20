@@ -33,33 +33,30 @@ const User = ({ user, setUpdateUser }) => {
         <div className="font-bold text-lg mb-2">Email: {email}</div>
         <div className="flex justify-center space-x-4">
           <button
-            className={`${
-              role === "admin"
-                ? "bg-gray-500 text-gray-900 hover:bg-gray-500"
-                : "bg-blue-500"
-            } hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`}
+            className={`${role === "admin"
+              ? "bg-blue-700 text-white"
+              : "bg-blue-300 text-gray-600"
+              } hover:bg-blue-500 hover:text-white font-bold py-2 px-4 rounded`}
             onClick={() => onAdminClick(_id, "admin")}
             disabled={role === "admin"}
           >
             Admin
           </button>
           <button
-            className={`${
-              role === "instructor"
-                ? "bg-gray-500 text-gray-400 hover:bg-gray-500"
-                : "bg-green-500"
-            } hover:bg-green-700 text-white font-bold py-2 px-4 rounded`}
+            className={`${role === "instructor"
+              ? "bg-blue-700 text-white"
+              : "bg-blue-300 text-gray-600"
+              } hover:bg-blue-500 hover:text-white font-bold py-2 px-4 rounded`}
             onClick={() => onInstructorClick(_id, "instructor")}
             disabled={role === "instructor"}
           >
             Instructor
           </button>
           <button
-            className={`${
-              role === "student"
-                ? "bg-gray-500 text-gray-400 hover:bg-gray-500"
-                : "bg-yellow-500"
-            } hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded`}
+            className={`${role === "student"
+              ? "bg-blue-700 text-white"
+              : "bg-blue-300 text-gray-600"
+              } hover:bg-blue-500 hover:text-white font-bold py-2 px-4 rounded`}
             onClick={() => onStudentClick(_id, "student")}
             disabled={role === "student"}
           >
